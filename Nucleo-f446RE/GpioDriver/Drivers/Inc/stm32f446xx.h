@@ -13,38 +13,94 @@
 typedef uint32_t u32;
 #define __vo	volatile
 
-#define BIT_POS_0	0
-#define BIT_POS_1	1
-#define BIT_POS_2	2
-#define BIT_POS_3	3
-#define BIT_POS_4	4
-#define BIT_POS_5	5
-#define BIT_POS_6	6
-#define BIT_POS_7	7
-#define BIT_POS_8	8
-#define BIT_POS_9	9
-#define BIT_POS_10	10
-#define BIT_POS_11	11
-#define BIT_POS_12	12
-#define BIT_POS_13	13
-#define BIT_POS_14	14
-#define BIT_POS_15	15
-#define BIT_POS_16	16
-#define BIT_POS_17	17
-#define BIT_POS_18	18
-#define BIT_POS_19	19
-#define BIT_POS_20	20
-#define BIT_POS_21	21
-#define BIT_POS_22	22
-#define BIT_POS_23	23
-#define BIT_POS_24	24
-#define BIT_POS_25	25
-#define BIT_POS_26	26
-#define BIT_POS_27	27
-#define BIT_POS_28	28
-#define BIT_POS_29	29
-#define BIT_POS_30	30
-#define BIT_POS_31	31
+
+/**
+ * ARM cortex Mx processor NVIC ISERx Register Addresses
+ */
+#define NVIC_ISER0						( (__vo u32*) 0xE000E100 )
+#define NVIC_ISER1						( (__vo u32*) 0xE000E104 )
+#define NVIC_ISER2						( (__vo u32*) 0xE000E108 )
+#define NVIC_ISER3						( (__vo u32*) 0xE000E10C )
+#define NVIC_ISER4						( (__vo u32*) 0xE000E110 )
+#define NVIC_ISER5						( (__vo u32*) 0xE000E114 )
+#define NVIC_ISER6						( (__vo u32*) 0xE000E118 )
+#define NVIC_ISER7						( (__vo u32*) 0xE000E11C )
+
+
+/**
+ * ARM cortex Mx processor NVIC ICERx Register Addresses
+ */
+#define NVIC_ICER0						( (__vo u32*) 0xE000E180 )
+#define NVIC_ICER1						( (__vo u32*) 0xE000E184 )
+#define NVIC_ICER2						( (__vo u32*) 0xE000E188 )
+#define NVIC_ICER3						( (__vo u32*) 0xE000E18C )
+#define NVIC_ICER4						( (__vo u32*) 0xE000E190 )
+#define NVIC_ICER5						( (__vo u32*) 0xE000E194 )
+#define NVIC_ICER6						( (__vo u32*) 0xE000E198 )
+#define NVIC_ICER7						( (__vo u32*) 0xE000E19C )
+
+
+/**
+ * ARM cortex Mx processor NVIC Interrupt priority Register Addresses
+ */
+#define NVIC_PR_BASE_ADDR				( (__vo u32*) 0xE000E400 )
+#define NO_PR_BITS_IMPLEMENTED			4
+
+
+enum PRIORITIES {
+	NVIC_IRQ_PRIO_0,
+	NVIC_IRQ_PRIO_1,
+	NVIC_IRQ_PRIO_2,
+	NVIC_IRQ_PRIO_3,
+	NVIC_IRQ_PRIO_4,
+	NVIC_IRQ_PRIO_5,
+	NVIC_IRQ_PRIO_6,
+	NVIC_IRQ_PRIO_7,
+	NVIC_IRQ_PRIO_8,
+	NVIC_IRQ_PRIO_9,
+	NVIC_IRQ_PRIO_10,
+	NVIC_IRQ_PRIO_11,
+	NVIC_IRQ_PRIO_12,
+	NVIC_IRQ_PRIO_13,
+	NVIC_IRQ_PRIO_14,
+	NVIC_IRQ_PRIO_15
+};
+
+//Bit positions
+enum BIT_POSITIONS{
+	BIT_POS_0,
+	BIT_POS_1,
+	BIT_POS_2,
+	BIT_POS_3,
+	BIT_POS_4,
+	BIT_POS_5,
+	BIT_POS_6,
+	BIT_POS_7,
+	BIT_POS_8,
+	BIT_POS_9,
+	BIT_POS_10,
+	BIT_POS_11,
+	BIT_POS_12,
+	BIT_POS_13,
+	BIT_POS_14,
+	BIT_POS_15,
+	BIT_POS_16,
+	BIT_POS_17,
+	BIT_POS_18,
+	BIT_POS_19,
+	BIT_POS_20,
+	BIT_POS_21,
+	BIT_POS_22,
+	BIT_POS_23,
+	BIT_POS_24,
+	BIT_POS_25,
+	BIT_POS_26,
+	BIT_POS_27,
+	BIT_POS_28,
+	BIT_POS_29,
+	BIT_POS_30,
+	BIT_POS_31,
+};
 
 #define ENABLE							    1
 #define DISABLE								0
@@ -162,31 +218,31 @@ typedef struct
 	__vo u32 AHB1RSTR;    /*RCC AHB1 peripheral reset register*/                                 //Offset Address 0x10
 	__vo u32 AHB2RSTR;    /*RCC AHB2 peripheral reset register*/                                 //Offset Address 0x14
 	__vo u32 AHB3RSTR;    /*RCC AHB3 peripheral reset register*/                                 //Offset Address 0x18
-	__vo u32 RESERVED0;   /*RESERVED*/                                                           //Offset Address 0x1C
+	u32 RESERVED0;		  /*RESERVED*/                                                           //Offset Address 0x1C
 	__vo u32 APB1RSTR;    /*RCC APB1 peripheral reset register*/                                 //Offset Address 0x20
 	__vo u32 APB2RSTR;    /*RCC APB2 peripheral reset register*/                                 //Offset Address 0x24
-	__vo u32 RESERVED1;   /*RESERVED*/                                                           //Offset Address 0x28
-	__vo u32 RESERVED2;   /*RESERVED*/                                                           //Offset Address 0x2C
+	u32 RESERVED1;        /*RESERVED*/                                                           //Offset Address 0x28
+	u32 RESERVED2;  	  /*RESERVED*/                                                           //Offset Address 0x2C
 	__vo u32 AHB1ENR;     /*RCC AHB1 peripheral clock enable register*/                          //Offset Address 0x30
 	__vo u32 AHB2ENR;     /*RCC AHB2 peripheral clock enable register */                         //Offset Address 0x34
 	__vo u32 AHB3ENR;     /*RCC AHB3 peripheral clock enable register*/                          //Offset Address 0x38
-	__vo u32 RESERVED3;   /*RESERVED*/                                                           //Offset Address 0x3C
+	u32 RESERVED3;	      /*RESERVED*/                                                           //Offset Address 0x3C
 	__vo u32 APB1ENR;     /*RCC APB1 peripheral clock enable register*/                          //Offset Address 0x40
 	__vo u32 APB2ENR;     /*RCC APB2 peripheral clock enable register*/                          //Offset Address 0x44
-	__vo u32 RESERVED4;   /*RESERVED*/                                                           //Offset Address 0x48
-	__vo u32 RESERVED5;   /*RESERVED*/                                                           //Offset Address 0x4C
+	u32 RESERVED4;   	  /*RESERVED*/                                                           //Offset Address 0x48
+	u32 RESERVED5;   	  /*RESERVED*/                                                           //Offset Address 0x4C
 	__vo u32 AHB1LPENR;   /*RCC AHB1 peripheral clock enable in low power mode register*/        //Offset Address 0x50
 	__vo u32 AHB2LPENR;   /*RCC AHB2 peripheral clock enable in low power mode register*/        //Offset Address 0x54
 	__vo u32 AHB3LPENR;   /*RCC AHB3 peripheral clock enable in low power mode register*/        //Offset Address 0x58
-	__vo u32 RESERVED6;   /*RESERVED*/                                                           //Offset Address 0x5C
+	u32 RESERVED6;        /*RESERVED*/                                                           //Offset Address 0x5C
 	__vo u32 APB1LPENR;   /*RCC APB1 peripheral clock enable in low power mode register*/        //Offset Address 0x60
 	__vo u32 APB2LPENR;   /*RCC APB2 peripheral clock enabled in low power mode register*/       //Offset Address 0x64
-	__vo u32 RESERVED7;   /*RESERVED*/                                                           //Offset Address 0x68
-	__vo u32 RESERVED8;   /*RESERVED*/                                                           //Offset Address 0x6C
+	u32 RESERVED7; 		  /*RESERVED*/                                                           //Offset Address 0x68
+	u32 RESERVED8;   	  /*RESERVED*/                                                           //Offset Address 0x6C
 	__vo u32 BDCR;        /*RCC Backup domain control register*/                                 //Offset Address 0x70
 	__vo u32 CSR;         /*RCC clock control & status register*/                                //Offset Address 0x74
-	__vo u32 RESERVED9;   /*RESERVED*/                                                           //Offset Address 0x78
-	__vo u32 RESERVED10;  /*RESERVED*/                                                           //Offset Address 0x7C
+	u32 RESERVED9;   	  /*RESERVED*/                                                           //Offset Address 0x78
+	u32 RESERVED10;  	  /*RESERVED*/                                                           //Offset Address 0x7C
 	__vo u32 SSCGR;       /*RCC spread spectrum clock generation register*/                      //Offset Address 0x80
 	__vo u32 PLLI2SCFGR;  /*RCC PLLI2S configuration register*/                                  //Offset Address 0x84
 	__vo u32 PLLSAICFGR;  /*RCC PLL configuration register*/                                     //Offset Address 0x88
@@ -197,8 +253,7 @@ typedef struct
 
 
 //EXTI register structure
-typedef struct
-{
+typedef struct{
 	__vo u32 IMR;          /* Interrupt mask register */                 //Offset Address 0x00
     __vo u32 EMR;          /* Event mask register */			         //Offset Address 0x04
     __vo u32 RTSR;         /* Rising trigger selection register */       //Offset Address 0x08
@@ -209,8 +264,7 @@ typedef struct
 
 
 //SYSCFG register structure
-typedef struct
-{
+typedef struct{
 	__vo u32 MEMRMP;       /*SYSCFG memory re-map register */                 				//Offset Address 0x00
     __vo u32 PMC;          /*SYSCFG peripheral mode configuration register*/			    //Offset Address 0x04
     __vo u32 EXTICR[4];    /*SYSCFG external interrupt configuration registers 1 to 4*/   	//Offset Address 0x08 to 0x14
@@ -223,163 +277,174 @@ typedef struct
 
 
 /*
-*Peripheral Definitions (Peripheral base address typecasted to xxx_RegDef_t)
+*Peripheral Definitions (Peripheral base address type-casted to xxx_RegDef_t)
 */
 
-#define GPIOA                                  ((GPIO_RegDef_t *)(GPIOA_BASE_ADDR))
-#define GPIOB                                  ((GPIO_RegDef_t *)(GPIOB_BASE_ADDR))
-#define GPIOC                                  ((GPIO_RegDef_t *)(GPIOC_BASE_ADDR))
-#define GPIOD                                  ((GPIO_RegDef_t *)(GPIOD_BASE_ADDR))
-#define GPIOE                                  ((GPIO_RegDef_t *)(GPIOE_BASE_ADDR))
-#define GPIOF                                  ((GPIO_RegDef_t *)(GPIOF_BASE_ADDR))
-#define GPIOG                                  ((GPIO_RegDef_t *)(GPIOG_BASE_ADDR))
-#define GPIOH                                  ((GPIO_RegDef_t *)(GPIOH_BASE_ADDR))
+#define GPIOA                                  ((GPIO_RegDef_t *) (GPIOA_BASE_ADDR))
+#define GPIOB                                  ((GPIO_RegDef_t *) (GPIOB_BASE_ADDR))
+#define GPIOC                                  ((GPIO_RegDef_t *) (GPIOC_BASE_ADDR))
+#define GPIOD                                  ((GPIO_RegDef_t *) (GPIOD_BASE_ADDR))
+#define GPIOE                                  ((GPIO_RegDef_t *) (GPIOE_BASE_ADDR))
+#define GPIOF                                  ((GPIO_RegDef_t *) (GPIOF_BASE_ADDR))
+#define GPIOG                                  ((GPIO_RegDef_t *) (GPIOG_BASE_ADDR))
+#define GPIOH                                  ((GPIO_RegDef_t *) (GPIOH_BASE_ADDR))
 
 //Clock Control
-#define RCC                                    ((RCC_RegDef_t *)(RCC_BASE_ADDR))
+#define RCC                                    ((RCC_RegDef_t *) (RCC_BASE_ADDR))
 
 
 //EXTI control(External interrupt control)
-#define EXTI								   ((EXTI_RegDef_t *)(EXTI_BASE_ADDR))
+#define EXTI								   ((EXTI_RegDef_t *) (EXTI_BASE_ADDR))
 
 
 //SYSCFG control Register
-#define SYSCFG								   ((SYSCFG_RegDef_t *)(SYSCFG_BASE_ADDR))
+#define SYSCFG								   ((SYSCFG_RegDef_t *) (SYSCFG_BASE_ADDR))
 
 //Enable Clock for GPIOx Peripherals
-#define GPIOA_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 0))
-#define GPIOB_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 1))
-#define GPIOC_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 2))
-#define GPIOD_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 3))
-#define GPIOE_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 4))
-#define GPIOF_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 5))
-#define GPIOG_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 6))
-#define GPIOH_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << 7))
+#define GPIOA_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_0))
+#define GPIOB_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_1))
+#define GPIOC_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_2))
+#define GPIOD_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_3))
+#define GPIOE_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_4))
+#define GPIOF_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_5))
+#define GPIOG_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_6))
+#define GPIOH_PERI_CLK_EN()                    (RCC->AHB1ENR |= (1 << BIT_POS_7))
 
 
 //Enable clock for I2Cx peripherals
-#define I2C1_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 21))
-#define I2C2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 22))
-#define I2C3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 23))
+#define I2C1_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_21))
+#define I2C2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_22))
+#define I2C3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_23))
 
 
 //Enable Clock for SPIx peripherals
-#define SPI1_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << 12))
-#define SPI2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 14))
-#define SPI3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 15))
-#define SPI4_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << 13))
+#define SPI1_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << BIT_POS_12))
+#define SPI2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_14))
+#define SPI3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_15))
+#define SPI4_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << BIT_POS_13))
 
 
 //Enable Clock for USARTx Peripherals
-#define USART1_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << 1 ))
-#define USART2_PERI_CLK_EN()                   (RCC->APB1ENR |= (1 << 17))
-#define USART3_PERI_CLK_EN()                   (RCC->APB1ENR |= (1 << 18))
-#define USART6_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << 5 ))
+#define USART1_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << BIT_POS_1 ))
+#define USART2_PERI_CLK_EN()                   (RCC->APB1ENR |= (1 << BIT_POS_17))
+#define USART3_PERI_CLK_EN()                   (RCC->APB1ENR |= (1 << BIT_POS_18))
+#define USART6_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << BIT_POS_5 ))
 
 
 //Enable Clock for UARTx Peripherals
-#define UART4_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << 19))
-#define UART5_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << 20))
+#define UART4_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << BIT_POS_19))
+#define UART5_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << BIT_POS_20))
 
 
 //Enable Clock for TIMx peripherals
-#define TIM1_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << 0))
-#define TIM2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 0))
-#define TIM3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 1))
-#define TIM4_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 2))
-#define TIM5_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 3))
-#define TIM6_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 4))
-#define TIM7_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << 5))
-#define TIM8_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << 1))
-#define TIM9_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << 16))
-#define TIM10_PERI_CLK_EN()                    (RCC->APB2ENR |= (1 << 17))
-#define TIM11_PERI_CLK_EN()                    (RCC->APB2ENR |= (1 << 18))
-#define TIM12_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << 6))
-#define TIM13_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << 7))
-#define TIM14_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << 8))
+#define TIM1_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << BIT_POS_0))
+#define TIM2_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_0))
+#define TIM3_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_1))
+#define TIM4_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_2))
+#define TIM5_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_3))
+#define TIM6_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_4))
+#define TIM7_PERI_CLK_EN()                     (RCC->APB1ENR |= (1 << BIT_POS_5))
+#define TIM8_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << BIT_POS_1))
+#define TIM9_PERI_CLK_EN()                     (RCC->APB2ENR |= (1 << BIT_POS_16))
+#define TIM10_PERI_CLK_EN()                    (RCC->APB2ENR |= (1 << BIT_POS_17))
+#define TIM11_PERI_CLK_EN()                    (RCC->APB2ENR |= (1 << BIT_POS_18))
+#define TIM12_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << BIT_POS_6))
+#define TIM13_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << BIT_POS_7))
+#define TIM14_PERI_CLK_EN()                    (RCC->APB1ENR |= (1 << BIT_POS_8))
 
 
 //Enable Clock for SYSCFG peripheral
-#define SYSCFG_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << 14))
-
+#define SYSCFG_PERI_CLK_EN()                   (RCC->APB2ENR |= (1 << BIT_POS_14))
 
 
 
 //Macros to reset GPIOx peripherals
-#define GPIOA_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 0)); (RCC->AHB1RSTR &= ~(1 << 0));}while(0)
-#define GPIOB_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 1)); (RCC->AHB1RSTR &= ~(1 << 1));}while(0)
-#define GPIOC_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 2)); (RCC->AHB1RSTR &= ~(1 << 2));}while(0)
-#define GPIOD_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 3)); (RCC->AHB1RSTR &= ~(1 << 3));}while(0)
-#define GPIOE_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 4)); (RCC->AHB1RSTR &= ~(1 << 4));}while(0)
-#define GPIOF_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 5)); (RCC->AHB1RSTR &= ~(1 << 5));}while(0)
-#define GPIOG_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 6)); (RCC->AHB1RSTR &= ~(1 << 6));}while(0)
-#define GPIOH_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7));}while(0)
+#define GPIOA_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_0)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_0));}while(0)
+#define GPIOB_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_1)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_1));}while(0)
+#define GPIOC_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_2)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_2));}while(0)
+#define GPIOD_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_3)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_3));}while(0)
+#define GPIOE_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_4)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_4));}while(0)
+#define GPIOF_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_5)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_5));}while(0)
+#define GPIOG_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_6)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_6));}while(0)
+#define GPIOH_REG_REST()                    do {(RCC->AHB1RSTR |= (1 << BIT_POS_7)); (RCC->AHB1RSTR &= ~(1 << BIT_POS_7));}while(0)
 
 
 //Disable Clock for GPIOx Peripherals
-#define GPIOA_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 0))
-#define GPIOB_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 1))
-#define GPIOC_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 2))
-#define GPIOD_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 3))
-#define GPIOE_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 4))
-#define GPIOF_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 5))
-#define GPIOG_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 6))
-#define GPIOH_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << 7))
-
+#define GPIOA_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_0))
+#define GPIOB_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_1))
+#define GPIOC_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_2))
+#define GPIOD_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_3))
+#define GPIOE_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_4))
+#define GPIOF_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_5))
+#define GPIOG_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_6))
+#define GPIOH_PERI_CLK_DI()                    (RCC->AHB1ENR &= ~(1 << BIT_POS_7))
 
 //Disable clock for I2Cx peripherals
-#define I2C1_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 21))
-#define I2C2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 22))
-#define I2C3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 23))
+#define I2C1_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_21))
+#define I2C2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_22))
+#define I2C3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_23))
 
 
 //Disable Clock for SPIx peripherals
-#define SPI1_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << 12))
-#define SPI2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 14))
-#define SPI3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 15))
-#define SPI4_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << 13))
+#define SPI1_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << BIT_POS_12))
+#define SPI2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_14))
+#define SPI3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_15))
+#define SPI4_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << BIT_POS_13))
 
 
 //Disable Clock for USARTx Peripherals
-#define USART1_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << 1 ))
-#define USART2_PERI_CLK_DI()                   (RCC->APB1ENR &= ~(1 << 17))
-#define USART3_PERI_CLK_DI()                   (RCC->APB1ENR &= ~(1 << 18))
-#define USART6_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << 5 ))
+#define USART1_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << BIT_POS_1 ))
+#define USART2_PERI_CLK_DI()                   (RCC->APB1ENR &= ~(1 << BIT_POS_17))
+#define USART3_PERI_CLK_DI()                   (RCC->APB1ENR &= ~(1 << BIT_POS_18))
+#define USART6_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << BIT_POS_5 ))
 
 
 //Disable Clock for UARTx Peripherals
-#define UART4_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << 19))
-#define UART5_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << 20))
+#define UART4_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << BIT_POS_19))
+#define UART5_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << BIT_POS_20))
 
 
 //Disable Clock for TIMx peripherals
-#define TIM1_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << 0))
-#define TIM2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 0))
-#define TIM3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 1))
-#define TIM4_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 2))
-#define TIM5_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 3))
-#define TIM6_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 4))
-#define TIM7_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << 5))
-#define TIM8_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << 1))
-#define TIM9_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << 16))
-#define TIM10_PERI_CLK_DI()                    (RCC->APB2ENR &= ~(1 << 17))
-#define TIM11_PERI_CLK_DI()                    (RCC->APB2ENR &= ~(1 << 18))
-#define TIM12_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << 6))
-#define TIM13_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << 7))
-#define TIM14_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << 8))
+#define TIM1_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << BIT_POS_0))
+#define TIM2_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_0))
+#define TIM3_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_1))
+#define TIM4_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_2))
+#define TIM5_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_3))
+#define TIM6_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_4))
+#define TIM7_PERI_CLK_DI()                     (RCC->APB1ENR &= ~(1 << BIT_POS_5))
+#define TIM8_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << BIT_POS_1))
+#define TIM9_PERI_CLK_DI()                     (RCC->APB2ENR &= ~(1 << BIT_POS_16))
+#define TIM10_PERI_CLK_DI()                    (RCC->APB2ENR &= ~(1 << BIT_POS_17))
+#define TIM11_PERI_CLK_DI()                    (RCC->APB2ENR &= ~(1 << BIT_POS_18))
+#define TIM12_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << BIT_POS_6))
+#define TIM13_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << BIT_POS_7))
+#define TIM14_PERI_CLK_DI()                    (RCC->APB1ENR &= ~(1 << BIT_POS_8))
 
 
 //Disable Clock for SYSCFG peripheral
-#define SYSCFG_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << 14))
+#define SYSCFG_PERI_CLK_DI()                   (RCC->APB2ENR &= ~(1 << BIT_POS_14))
 
 
 #define GPIO_BASE_ADDR_TO_CODE(x)				( (x == GPIOA)?0:\
-												 (x == GPIOA)?1:\
-												 (x == GPIOA)?2:\
-												 (x == GPIOA)?3:\
-												 (x == GPIOA)?4:\
-										  		 (x == GPIOA)?5:\
-												 (x == GPIOA)?6:\
-		  										 (x == GPIOA)?7:0)
+												 (x == GPIOB)?1:\
+												 (x == GPIOC)?2:\
+												 (x == GPIOD)?3:\
+												 (x == GPIOE)?4:\
+										  		 (x == GPIOF)?5:\
+												 (x == GPIOG)?6:\
+		  										 (x == GPIOH)?7:0)
+
+//External iterrupt IRQ_NO
+#define IRQ_NO_EXTI0							6
+#define IRQ_NO_EXTI1							7
+#define IRQ_NO_EXTI2							8
+#define IRQ_NO_EXTI3							9
+#define IRQ_NO_EXTI4							10
+#define IRQ_NO_EXTI9_5							23
+#define IRQ_NO_EXTI015_10						40
+
+
+
+
 
 #endif /* INC_STM32F446XX_H_ */

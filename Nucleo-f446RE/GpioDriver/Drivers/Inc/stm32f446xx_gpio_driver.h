@@ -51,52 +51,53 @@
 
 /*
  * GPIO_PIN_NUMBERS
- *
  */
-#define GPIO_PIN_NO_0			0
-#define GPIO_PIN_NO_1			1
-#define GPIO_PIN_NO_2			2
-#define GPIO_PIN_NO_3			3
-#define GPIO_PIN_NO_4			4
-#define GPIO_PIN_NO_5			5
-#define GPIO_PIN_NO_6			6
-#define GPIO_PIN_NO_7			7
-#define GPIO_PIN_NO_8			8
-#define GPIO_PIN_NO_9			9
-#define GPIO_PIN_NO_10			10
-#define GPIO_PIN_NO_11			11
-#define GPIO_PIN_NO_12			12
-#define GPIO_PIN_NO_13			13
-#define GPIO_PIN_NO_14			14
-#define GPIO_PIN_NO_15			15
-
+enum GPIO_PINS{
+	GPIO_PIN_NO_0,
+	GPIO_PIN_NO_1,
+	GPIO_PIN_NO_2,
+	GPIO_PIN_NO_3,
+	GPIO_PIN_NO_4,
+	GPIO_PIN_NO_5,
+	GPIO_PIN_NO_6,
+	GPIO_PIN_NO_7,
+	GPIO_PIN_NO_8,
+	GPIO_PIN_NO_9,
+	GPIO_PIN_NO_10,
+	GPIO_PIN_NO_11,
+	GPIO_PIN_NO_12,
+	GPIO_PIN_NO_13,
+	GPIO_PIN_NO_14,
+	GPIO_PIN_NO_15
+};
 
 
 typedef struct{
-
 	uint8_t GPIO_PinNumber;
 	uint8_t GPIO_PinMode;				//	@GPIO pin MODES
 	uint8_t GPIO_PinSpeed;				//	@GPIO_PIN_OUT_SPEEDS
-	uint8_t GPIO_PinPuPdCtrl;			//	@GPIO_PIN_PPP_PD
+	uint8_t GPIO_PinPuPdCtrl;			//	@GPIO_PIN_PP_PD
 	uint8_t GPIO_PinOPType;				//	@GPIO_PIN_OP_TYPES
 	uint8_t GPIO_PinAltFunMode;			//
 }GPIO_PinConfig_t;
 
 
 typedef struct{
-
 	GPIO_RegDef_t *pGPIOx; // This pointer holds the base address of the GPIO port.
 	GPIO_PinConfig_t GPIO_PinConfig; // This holds GPIO pin configurations
 }GPIOx_Handle_t;
 
+
 //Peripheral Clock Control
 void GPIO_PeripheralClkCtrl(GPIO_RegDef_t *pGPIOx, uint8_t EnOrDi);
+
 
 /*
  *GPIO port Init and DeInit
  */
 void GPIO_Inint(GPIOx_Handle_t *pGPIOHandle);
 void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
+
 
 /*GPIO Read and write*/
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber);
@@ -105,13 +106,13 @@ void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber, uint8_t Val
 void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value);
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber);
 
+
 /*
- * Interrupt config and Handle
+ * Interrupt configure and Handle
  */
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnOrDi);
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnOrDi);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority);
 void GPIO_IRQHandle(uint8_t PinNumber);
-
-
 
 
 #endif /* INC_STM32F446XX_GPIO_DRIVER_H_ */

@@ -2,7 +2,7 @@
  * 002LED_with_Button.c
  *
  *  Created on: Feb 21, 2024
- *      Author: mirafra
+ *      Author: Shaik
  */
 
 
@@ -52,10 +52,10 @@ int main(void)
 	GPIO_Inint(&gpioLed);
 
 	//Button Init
-	gpioLed.pGPIOx = GPIOC;
-	gpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
-	gpioLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
-	gpioLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OP_SPEED_HIGH;
+	gpioButton.pGPIOx = GPIOC;
+	gpioButton.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
+	gpioButton.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+	gpioButton.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OP_SPEED_HIGH;
 	GPIO_PeripheralClkCtrl(GPIOC, ENABLE);
 	GPIO_Inint(&gpioButton);
 
