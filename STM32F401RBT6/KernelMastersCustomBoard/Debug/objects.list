@@ -1,5 +1,6 @@
+"./Bsp/lcd.o"
 "./Drivers/Src/stm32f401xx_gpio_driver.o"
-"./Src/001_ledBlinky.o"
+"./Src/004_lcd_interface.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f401rbtx.o"

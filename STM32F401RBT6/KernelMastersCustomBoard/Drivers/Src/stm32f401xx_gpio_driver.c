@@ -83,7 +83,7 @@ void GPIO_PeripheralClkCtrl(GPIO_RegDef_t *pGPIOx, uint8_t EnOrDi)
 }
 
 
-void GPIO_Inint(GPIOx_Handle_t *pGPIOHandle)
+void GPIO_Init(GPIOx_Handle_t *pGPIOHandle)
 {
 	uint32_t temp = 0;
 
@@ -92,7 +92,7 @@ void GPIO_Inint(GPIOx_Handle_t *pGPIOHandle)
 	{
 		// Non Interrupt mode
 		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode) << ((pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber) * 2);
-		pGPIOHandle->pGPIOx->MODER &= ~(3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		pGPIOHandle->pGPIOx->MODER &= ~(3 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber) * 2);
 		pGPIOHandle->pGPIOx->MODER |= temp;
 	}
 	else
@@ -166,7 +166,6 @@ void GPIO_Inint(GPIOx_Handle_t *pGPIOHandle)
 		pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * temp2));
 	}
 }
-
 
 
 void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
@@ -287,7 +286,6 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 
 	*(NVIC_PR_BASE_ADDR + (iprx * 4)) |= (IRQPriority << shift_amount);
 }
-
 
 
 void GPIO_IRQHandle(uint8_t PinNumber)

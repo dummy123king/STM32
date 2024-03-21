@@ -95,7 +95,7 @@ void GPIO_PeripheralClkCtrl(GPIO_RegDef_t *pGPIOx, uint8_t EnOrDi);
 /*
  *GPIO port Init and DeInit
  */
-void GPIO_Inint(GPIOx_Handle_t *pGPIOHandle);
+void GPIO_Init(GPIOx_Handle_t *pGPIOHandle);
 void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
 
 

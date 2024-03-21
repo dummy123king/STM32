@@ -1,7 +1,6 @@
 #include "stm32f401xx_gpio_driver.h"
 
-
-#define ENABLE_BUZZER ENABLE
+#define ENABLE_BUZZER DISABLE
 
 #define HIGH 1
 #define LOW 0
@@ -36,6 +35,7 @@ int main(void)
     GPIO_PeripheralClkCtrl(GPIOB, ENABLE);
     GPIO_PeripheralClkCtrl(GPIOC, ENABLE);
 
+
 #if ENABLE_BUZZER == ENABLE
     GPIOx_Handle_t gpioBuzzer;
 #endif
@@ -61,7 +61,7 @@ int main(void)
     gpioBuzzer.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OP_SPEED_HIGH;
     gpioBuzzer.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
     gpioBuzzer.GPIO_PinConfig.GPIO_PinPuPdCtrl = GPIO_NO_PUPD;
-    GPIO_Inint(&gpioBuzzer);
+    GPIO_Init(&gpioBuzzer);
 #endif
 
     gpioButtonUp.pGPIOx = GPIOC;
@@ -76,11 +76,11 @@ int main(void)
     gpioButtonDn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_OP_SPEED_HIGH;
     gpioButtonDn.GPIO_PinConfig.GPIO_PinPuPdCtrl = GPIO_PIN_PU;
 
-    GPIO_Inint(&gpioGreenLed);
-    GPIO_Inint(&gpioRedLed);
+    GPIO_Init(&gpioGreenLed);
+    GPIO_Init(&gpioRedLed);
     GPIO_WriteToOutputPort(GPIOB, 0x6000);
-    GPIO_Inint(&gpioButtonUp);
-    GPIO_Inint(&gpioButtonDn);
+    GPIO_Init(&gpioButtonUp);
+    GPIO_Init(&gpioButtonDn);
 
 	//IRQ configurations
 	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5, NVIC_IRQ_PRIO_14);
