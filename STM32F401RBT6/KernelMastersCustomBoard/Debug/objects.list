@@ -1,4 +1,5 @@
 "./Bsp/lcd.o"
+"./Bsp/pir.o"
 "./Drivers/Src/stm32f401xx_gpio_driver.o"
 "./Src/004_lcd_interface.o"
 "./Src/syscalls.o"
